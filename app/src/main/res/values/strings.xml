@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">TrackAndTrigger</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="item_name"><![CDATA[<Item>]]></string>
+    <string name="item_qty_label">Quantity</string>
+    <string name="item_qty"><![CDATA[<quantity>]]></string>
+    <string name="cart_button_text">Cart</string>
+    <string name="item_image_label">Item Image</string>
+    <string name="add_image_button_text">CHOOSE IMAGE</string>
+    <string name="item_name_label">Item Name</string>
+    <string name="subtract_quantity_button">-</string>
+    <string name="item_quantity_label">Item Quantity</string>
+    <string name="default_zero">0</string>
+    <string name="add_quantity_button">+</string>
+    <string name="to_add_category">To Add Category</string>
+    <string name="category"><![CDATA[<category>]]></string>
+</resources>
