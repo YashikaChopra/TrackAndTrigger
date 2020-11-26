@@ -42,10 +42,9 @@
             app:destination="@id/categoryFragment" />
         <argument
             android:name="currentCategory"
-
-            android:defaultValue="default"
-
             app:argType="com.example.trackandtrigger.data.data_category.Category" />
+
+            <!--android:defaultValue="default"-->
     </fragment>
     <fragment
         android:id="@+id/addItemFragment"
