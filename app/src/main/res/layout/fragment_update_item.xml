@@ -50,7 +50,7 @@ tools:context=".fragments.UpdateItemFragment">
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <!--<Button
         android:id="@+id/subtract_quantity_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,14 +59,14 @@ tools:context=".fragments.UpdateItemFragment">
         android:layout_marginTop="8dp"
         android:text="@string/subtract_quantity_button"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold" /> -->
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_item_quantity"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/update_input_item_name"
-        android:layout_toEndOf="@id/subtract_quantity_button">
+        android:layout_below="@id/update_input_item_name">
+        <!--android:layout_toEndOf="@id/subtract_quantity_button"> -->
 
         <EditText
             android:id="@+id/update_item_quantity"
@@ -83,7 +83,7 @@ tools:context=".fragments.UpdateItemFragment">
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <Button
+    <!--<Button
         android:id="@+id/add_quantity_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,7 +92,7 @@ tools:context=".fragments.UpdateItemFragment">
         android:layout_toEndOf="@+id/input_item_quantity"
         android:text="@string/add_quantity_button"
         android:textSize="22sp"
-        android:textStyle="bold" />
+        android:textStyle="bold" /> -->
 
     <Button
         android:id="@+id/update_list_button"
@@ -100,8 +100,7 @@ tools:context=".fragments.UpdateItemFragment">
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Update"
-        android:layout_below="@id/subtract_quantity_button"
-
+        android:layout_below="@id/input_item_quantity"
         />
 
 </RelativeLayout>
