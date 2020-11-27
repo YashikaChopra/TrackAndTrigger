@@ -9,7 +9,7 @@
         android:id="@+id/categoryFragment"
         android:name="com.example.trackandtrigger.fragments.CategoryFragment"
         android:label="Category"
-        tools:layout="@layout/fragment_category" >
+        tools:layout="@layout/fragment_category">
         <action
             android:id="@+id/action_categoryFragment_to_itemsFragment"
             app:destination="@id/itemsFragment" />
@@ -21,7 +21,7 @@
         android:id="@+id/addCategoryFragment"
         android:name="com.example.trackandtrigger.fragments.AddCategoryFragment"
         android:label="Add Category"
-        tools:layout="@layout/fragment_add_category" >
+        tools:layout="@layout/fragment_add_category">
         <action
             android:id="@+id/action_addCategoryFragment_to_categoryFragment2"
             app:destination="@id/categoryFragment" />
@@ -30,7 +30,7 @@
         android:id="@+id/itemsFragment"
         android:name="com.example.trackandtrigger.fragments.ItemsFragment"
         android:label="Items"
-        tools:layout="@layout/fragment_items" >
+        tools:layout="@layout/fragment_items">
         <action
             android:id="@+id/action_itemsFragment_to_addItemFragment"
             app:destination="@id/addItemFragment" />
@@ -44,13 +44,13 @@
             android:name="currentCategory"
             app:argType="com.example.trackandtrigger.data.data_category.Category" />
 
-            <!--android:defaultValue="default"-->
+        <!--android:defaultValue="default"-->
     </fragment>
     <fragment
         android:id="@+id/addItemFragment"
         android:name="com.example.trackandtrigger.fragments.AddItemFragment"
         android:label="Add Item"
-        tools:layout="@layout/fragment_add_item" >
+        tools:layout="@layout/fragment_add_item">
         <action
             android:id="@+id/action_addItemFragment_to_itemsFragment"
             app:destination="@id/itemsFragment" />
@@ -62,7 +62,7 @@
         android:id="@+id/updateItemFragment"
         android:name="com.example.trackandtrigger.fragments.UpdateItemFragment"
         android:label="Update Item"
-        tools:layout="@layout/fragment_update_item" >
+        tools:layout="@layout/fragment_update_item">
         <action
             android:id="@+id/action_updateItemFragment_to_itemsFragment"
             app:destination="@id/itemsFragment" />

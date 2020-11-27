@@ -15,4 +15,14 @@
     <string name="add_quantity_button">+</string>
     <string name="to_add_category">To Add Category</string>
     <string name="category"><![CDATA[<category>]]></string>
+
+    <string name="facebook_app_id">2811077639215012</string>
+    <string name="fb_login_protocol_scheme">fb2811077639215012</string>
+    <string name="title_activity_registration">RegistrationActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="signed_out">signed out</string>
 </resources>
