@@ -85,7 +85,7 @@ class AddItemFragment : Fragment() {
     }
 
     private fun inputCheck(itemName: String, quantity: Editable): Boolean{
-        return !(TextUtils.isEmpty(itemName) && quantity.isEmpty())
+        return !(TextUtils.isEmpty(itemName) || quantity.isEmpty())
     }
 }
 
