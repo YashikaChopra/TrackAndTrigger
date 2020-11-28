@@ -70,8 +70,8 @@ public class Message extends AppCompatActivity implements View.OnClickListener {
         } else {
             sendSMSMessage();
             submit();
-            //Intent intent=new Intent(Message.this,Notification.class);
-            //startActivity(intent);
+            Intent intent=new Intent(Message.this,Notification.class);
+            startActivity(intent);
         }
 
     }

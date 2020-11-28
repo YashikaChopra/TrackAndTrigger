@@ -171,7 +171,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     //return;
                 }
                 if(flag1) {
-                    final GMailSender sender = new GMailSender("manasabollavaram2000@gmail.com", "Bits@1234");
+                    final GMailSender1 sender = new GMailSender1("manasabollavaram2000@gmail.com", "Bits@1234");
                     Random rnd = new Random();
                     int number = rnd.nextInt(999999);
                     otp = Integer.toString(number);
@@ -234,7 +234,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
 };
 
-class GMailSender extends javax.mail.Authenticator {
+class GMailSender1 extends javax.mail.Authenticator {
 /*
     private String mailhost = "smtp.gmail.com";
 */
@@ -246,7 +246,7 @@ class GMailSender extends javax.mail.Authenticator {
         Security.addProvider(new JSSEProvider());
     }
 
-    public GMailSender(String user, String password) {
+    public GMailSender1(String user, String password) {
         this.username = user;
         this.password = password;
 
@@ -290,9 +290,9 @@ class GMailSender extends javax.mail.Authenticator {
     }
 }
 
-final class JSSEProvider extends Provider {
+final class JSSEProvider1 extends Provider {
 
-    public JSSEProvider() {
+    public JSSEProvider1() {
         super("HarmonyJSSE", 1.0, "Harmony JSSE Provider");
         AccessController.doPrivileged(new java.security.PrivilegedAction<Void>() {
             public Void run() {
