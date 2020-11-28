@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.trackandtrigger">
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -26,6 +28,15 @@
             android:name=".activities.AddCategoryActivity"
             android:parentActivityName=".activities.CategoryActivity" />
 
+
+        <activity android:name=".Diary_Activity2"></activity>
+        <activity android:name=".Diary_Activity" />
+        <activity android:name=".NotificationMessage" />
+        <activity android:name=".Message" />
+        <activity android:name=".Notification" />
+        <activity android:name=".TOdo_Activity2" />
+        <activity android:name=".Todo_Activity" />
+        <activity android:name=".MainActivity"/>
 
         <activity android:name=".PhoneVerificationActivity" />
         <activity android:name=".SignUpActivity" />
