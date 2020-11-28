@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "382987622849",
+    "firebase_url": "https://trackandtrigger-eba9a.firebaseio.com",
+    "project_id": "trackandtrigger-eba9a",
+    "storage_bucket": "trackandtrigger-eba9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382987622849:android:4842c6d6f9c83ed3c2b740",
+        "android_client_info": {
+          "package_name": "com.example.trackandtrigger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382987622849-iksi0m6q81hs62gajq3sjn3iihah6mc2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.trackandtrigger",
+            "certificate_hash": "cfe45fcfcf6f1dfb8f4d42642c4e8e3b64456f84"
+          }
+        },
+        {
+          "client_id": "382987622849-5kdi1h2cuiuf1ou7ermkru8omd42ilbu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0fydh6D2Bzo9EIyVzo8k0jZny_dqDwI4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382987622849-5kdi1h2cuiuf1ou7ermkru8omd42ilbu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
