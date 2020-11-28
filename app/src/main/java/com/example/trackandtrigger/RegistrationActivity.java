@@ -10,7 +10,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.trackandtrigger.activities.CategoryActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -82,7 +81,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         if (currentUser != null) {
             Log.d(TAG, "Currently Signed in: " + currentUser.getEmail());
             Toast.makeText(RegistrationActivity.this, "Currently Logged in: " + currentUser.getEmail(), Toast.LENGTH_LONG).show();
-            Intent i = new Intent(RegistrationActivity.this, CategoryActivity.class);
+            Intent i = new Intent(RegistrationActivity.this, MainActivity.class);
             startActivity(i);
         }
     }
@@ -108,7 +107,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(RegistrationActivity.this, "Authentication Succeeded.", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(RegistrationActivity.this, CategoryActivity.class);
+                            Intent i = new Intent(RegistrationActivity.this, MainActivity.class);
                             startActivity(i);
                         } else {
                             // If sign-in fails, a message will display to the user.
