@@ -81,7 +81,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             Log.d(TAG, "Currently Signed in: " + currentUser.getEmail());
             Toast.makeText(RegistrationActivity.this, "Currently Logged in: " + currentUser.getEmail(), Toast.LENGTH_LONG).show();
             Intent i = new Intent(RegistrationActivity.this, MainActivity.class);
-            //startActivity(i);
+            startActivity(i);
         }
     }
     @Override

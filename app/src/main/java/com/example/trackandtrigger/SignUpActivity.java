@@ -3,8 +3,11 @@ package com.example.trackandtrigger;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -31,17 +34,40 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.security.AccessController;
+import java.security.Provider;
+import java.security.Security;
+import java.util.Properties;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener, TextWatcher {
 
     private FirebaseAuth mAuth;
     EditText username, email, password, repassword, emailOTP;
-    Button createAccount, sendEmail, verifyEmail, resendEmail;
+    Button createAccount, sendEmail, verifyEmail;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     String TAG = "EmailPswdSignUp";
 
     private boolean emailVerified = false;
+    private String otp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +88,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         sendEmail = (Button)findViewById(R.id.b_sendEmail);
         //buttons for verifying otp
         verifyEmail = (Button)findViewById(R.id.b_verifyEmail);
-        //buttons for resending otp
-        resendEmail = (Button)findViewById(R.id.b_resendEmail);
         //otps
         emailOTP = (EditText)findViewById(R.id.emailOTP);
 
@@ -75,9 +99,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         createAccount.setOnClickListener(this);
         sendEmail.setOnClickListener(this);
         verifyEmail.setOnClickListener(this);
-        resendEmail.setOnClickListener(this);
 
-        //createAccount.setEnabled(false);
+        createAccount.setEnabled(false);
+
+        if (android.os.Build.VERSION.SDK_INT > 9)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
     }
 
     //check if password and re password match
@@ -115,6 +144,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     //functions for OnClickListeners
+    @SuppressLint("StaticFieldLeak")
     @Override
     public void onClick(View v) {
         boolean flag1=true;
@@ -141,11 +171,37 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     //return;
                 }
                 if(flag1) {
+                    final GMailSender sender = new GMailSender("manasabollavaram2000@gmail.com", "Bits@1234");
+                    Random rnd = new Random();
+                    int number = rnd.nextInt(999999);
+                    otp = Integer.toString(number);
+                    new AsyncTask<Void, Void, Void>() {
+                            @Override public Void doInBackground(Void... arg) {
+                                try {
+                                    sender.sendMail("TrackAndTrigger OTP Verification",
+                                            otp+" is your OTP",
+                                            "manasabollavaram2000@gmail.com",
+                                            email.getText().toString());
+                                } catch (Exception e) {
+                                    Log.e("SendMail", e.getMessage(), e);
+                                }
+                                return null;}
+                        }.execute();
                 }
                 break;
-            case R.id.b_resendEmail:
+            /*case R.id.b_resendEmail:
                 //sendEmailVerification();
-                break;
+                break;*/
+                case R.id.b_verifyEmail:
+                    if(emailOTP.getText().toString().equals(otp))
+                    {
+                        createAccount.setEnabled(true);
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "Incorrect OTP", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
             case R.id.CreateAccount:
                 createAccount(email.getText().toString(),password.getText().toString());
 
@@ -178,3 +234,77 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
 };
 
+class GMailSender extends javax.mail.Authenticator {
+/*
+    private String mailhost = "smtp.gmail.com";
+*/
+    private final String username;
+    private final String password;
+    private final Session session;
+
+    static {
+        Security.addProvider(new JSSEProvider());
+    }
+
+    public GMailSender(String user, String password) {
+        this.username = user;
+        this.password = password;
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        //session = Session.getDefaultInstance(props, this);
+        session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+    }
+
+    protected PasswordAuthentication getPasswordAuthentication() {
+        return new PasswordAuthentication(username, password);
+    }
+
+    public synchronized void sendMail(String subject, String body, String sender, String recipients) throws Exception {
+                    try {
+                        Message message = new MimeMessage(session);
+                        message.setFrom(new InternetAddress("manasabollavaram2000@gmail.com"));
+                        message.setRecipients(Message.RecipientType.TO,
+                                InternetAddress.parse(recipients));
+                        message.setSubject(subject);
+                        message.setText(body);
+
+                        Transport.send(message);
+                        //Toast.makeText(getApplicationContext(), "Mail sent", Toast.LENGTH_SHORT).show();
+                        //System.out.println("Done");
+
+                    } catch (MessagingException e) {
+                        //throw new RuntimeException(e);
+                        //Toast.makeText(getApplicationContext(), "Unable to send mail", Toast.LENGTH_SHORT).show();
+                    }
+
+    }
+}
+
+final class JSSEProvider extends Provider {
+
+    public JSSEProvider() {
+        super("HarmonyJSSE", 1.0, "Harmony JSSE Provider");
+        AccessController.doPrivileged(new java.security.PrivilegedAction<Void>() {
+            public Void run() {
+                put("SSLContext.TLS",
+                        "org.apache.harmony.xnet.provider.jsse.SSLContextImpl");
+                put("Alg.Alias.SSLContext.TLSv1", "TLS");
+                put("KeyManagerFactory.X509",
+                        "org.apache.harmony.xnet.provider.jsse.KeyManagerFactoryImpl");
+                put("TrustManagerFactory.X509",
+                        "org.apache.harmony.xnet.provider.jsse.TrustManagerFactoryImpl");
+                return null;
+            }
+        });
+    }
+}
