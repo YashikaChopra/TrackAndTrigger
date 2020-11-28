@@ -1,9 +1,10 @@
-package com.example.trackandtrigger.data
+package com.example.trackandtrigger.data.data_items
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.trackandtrigger.data.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

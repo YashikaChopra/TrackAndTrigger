@@ -1,4 +1,4 @@
-package com.example.trackandtrigger.data
+package com.example.trackandtrigger.data.data_items
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

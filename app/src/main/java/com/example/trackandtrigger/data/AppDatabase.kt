@@ -6,6 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.trackandtrigger.data.data_category.Category
 import com.example.trackandtrigger.data.data_category.CategoryDao
+import com.example.trackandtrigger.data.data_items.ItemDao
+import com.example.trackandtrigger.data.data_items.Items
 
 
 @Database(entities = [Items::class, Category::class], version = 1, exportSchema = false)

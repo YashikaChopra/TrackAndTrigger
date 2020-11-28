@@ -140,7 +140,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
         /*// Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        Intent i1 = new Intent(SignUpActivity.this, MainActivity.class);*/
+        Intent i1 = new Intent(SignUpActivity.this, CategoryActivity.class);*/
     }
 
     //functions for OnClickListeners
