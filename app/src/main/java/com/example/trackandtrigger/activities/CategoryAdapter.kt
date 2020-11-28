@@ -32,9 +32,12 @@ class CategoryAdapter: RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>(
 
         holder.itemView.singleCategory_row.setOnClickListener{
             val currentCate = currentItem.toString()
+            val categoryName = currentItem.categoryName
             val context = holder.itemView.category_name.context
-            val intent = Intent(context, ItemsActivity::class.java)
-            intent.putExtra(EXTRA_MESSAGE, currentCate)
+            val intent = Intent(context, ItemsActivity::class.java).apply{
+                putExtra(EXTRA_MESSAGE, currentCate)
+                putExtra("categoryName",categoryName)
+            }
             context.startActivity(intent)
 
 

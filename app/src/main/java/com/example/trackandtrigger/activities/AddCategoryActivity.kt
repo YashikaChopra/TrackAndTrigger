@@ -21,6 +21,7 @@ class AddCategoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_category)
+        setTitle("Add Category")
 
         mCategoryViewModel = ViewModelProvider(this).get(CategoryViewModel::class.java)
 

@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
-        <activity android:name=".activities.UpdateItemActivity"></activity>
+        <activity android:name=".activities.UpdateItemActivity"
+            android:parentActivityName=".activities.ItemsActivity"></activity>
         <activity
             android:name=".activities.AddItemActivity"
             android:parentActivityName=".activities.ItemsActivity"></activity>

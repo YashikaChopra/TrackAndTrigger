@@ -19,6 +19,7 @@ class AddItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_item)
+        setTitle("Add Item")
 
         mItemViewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
 

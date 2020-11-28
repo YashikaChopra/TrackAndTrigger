@@ -23,6 +23,7 @@ class CategoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.layout_category)
+        setTitle("Category")
 
         //RecyclerView
         val adapter = CategoryAdapter()

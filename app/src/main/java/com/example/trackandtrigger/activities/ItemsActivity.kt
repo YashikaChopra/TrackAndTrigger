@@ -22,7 +22,10 @@ class ItemsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_items)
 
+
         val categoryC = intent.getStringExtra(EXTRA_MESSAGE)
+        val categoryN = intent.getStringExtra("categoryName")
+        setTitle(categoryN)
 
         //RecyclerView
         val adapter = ItemsAdapter()

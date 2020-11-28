@@ -35,11 +35,14 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsAdapter.ItemViewHolder>() {
 
             val itemNameForUpdate = currentItem.itemName
             val itemQuantityForUpdate = currentItem.quantity.toString()
+            val itemIdForUpdate = currentItem.id_item
             val context = holder.itemView.item_name.context
             val intent = Intent(context, UpdateItemActivity::class.java).apply {
                 putExtra("itemName", itemNameForUpdate )
                 putExtra("quantity", itemQuantityForUpdate)
                 putExtra("category", currentItem.category)
+                putExtra("id_name", itemIdForUpdate)
+                putExtra("currentItem", currentItem)
             }
             context.startActivity(intent)
 
