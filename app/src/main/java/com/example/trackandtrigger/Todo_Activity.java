@@ -22,6 +22,7 @@ public class Todo_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_);
+        setTitle("TO DO LIST");
 
         database= Room.databaseBuilder(getApplicationContext(), com.example.trackandtrigger.TodoDatabase.class,"TODOS")
                 .allowMainThreadQueries()

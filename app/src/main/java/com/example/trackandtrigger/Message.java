@@ -63,6 +63,7 @@ public class Message extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+        setTitle("Reminder");
         btn_time = findViewById(R.id.btn_time);
         btn_date = findViewById(R.id.btn_date);
         btn_done = findViewById(R.id.btn_done);
@@ -208,6 +209,7 @@ public class Message extends AppCompatActivity implements View.OnClickListener {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 btn_date.setText(day + "-" + (month + 1) + "-" + year);
@@ -240,7 +242,7 @@ public class Message extends AppCompatActivity implements View.OnClickListener {
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
         String dateandtime = date + " " + timeTonotify;
-        DateFormat formatter = new SimpleDateFormat("d-M-yyyy hh:mm");
+        @SuppressLint("SimpleDateFormat") DateFormat formatter = new SimpleDateFormat("d-M-yyyy hh:mm");
         try {
             Date date1 = formatter.parse(dateandtime);
             am.set(AlarmManager.RTC_WAKEUP, date1.getTime(), pendingIntent);

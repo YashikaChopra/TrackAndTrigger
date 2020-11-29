@@ -16,6 +16,7 @@ public class Diary_Activity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_2);
+        setTitle("Diary Entry");
 
         editText=findViewById(R.id.diary_edit_text);
         String contents=getIntent().getStringExtra("contents");

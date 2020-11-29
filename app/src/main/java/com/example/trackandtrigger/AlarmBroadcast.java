@@ -1,5 +1,6 @@
 package com.example.trackandtrigger;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -8,13 +9,18 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import java.security.AccessController;
 import java.security.Provider;
@@ -36,9 +42,12 @@ public class AlarmBroadcast extends BroadcastReceiver {
         String date = bundle.getString("date") + " " + bundle.getString("time");
         String msg = bundle.getString("msg");
         String emailid = bundle.getString("emailid");
+//        String phone=bundle.getString("phone");
+//        String msg=bundle.getString("msg");
+
         //Click on Notification
 
-        Intent intent1 = new Intent(context, com.example.trackandtrigger.TOdo_Activity2.class);
+        Intent intent1 = new Intent(context, TOdo_Activity2.class);
         intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent1.putExtra("message", text);
         //Notification Builder
@@ -55,9 +64,9 @@ public class AlarmBroadcast extends BroadcastReceiver {
         contentView.setTextViewText(R.id.date, date);
         mBuilder.setAutoCancel(true);
         mBuilder.setOngoing(true);
-        mBuilder.setPriority(Notification.PRIORITY_HIGH);
+        mBuilder.setPriority(android.app.Notification.PRIORITY_HIGH);
         mBuilder.setOnlyAlertOnce(true);
-        mBuilder.build().flags = Notification.FLAG_NO_CLEAR | Notification.PRIORITY_HIGH;
+        mBuilder.build().flags = android.app.Notification.FLAG_NO_CLEAR | android.app.Notification.PRIORITY_HIGH;
         mBuilder.setContent(contentView);
         mBuilder.setContentIntent(pendingIntent);
 
@@ -71,7 +80,7 @@ public class AlarmBroadcast extends BroadcastReceiver {
 
         Notification notification = mBuilder.build();
         notificationManager.notify(1,notification);
-
+//        sendSMSMessage(phone,msg);
         final GMailSender sender = new GMailSender("manasabollavaram2000@gmail.com", "Bits@1234");
         new AsyncTask<Void, Void, Void>() {
             @SuppressLint("StaticFieldLeak")
@@ -87,9 +96,20 @@ public class AlarmBroadcast extends BroadcastReceiver {
                 return null;}
         }.execute();
 
-    }
-}
 
+
+    }
+
+//    private void sendSMSMessage(String phone, String msg) {
+//        final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0 ;
+//        SmsManager smsManager = SmsManager.getDefault();
+//
+//        smsManager.sendTextMessage(phone, null, msg, null, null);
+//        //Toast.makeText(null, Toast.LENGTH_LONG).show();
+//
+//    }
+
+}
 class GMailSender extends javax.mail.Authenticator {
     /*
         private String mailhost = "smtp.gmail.com";
