@@ -27,4 +27,5 @@
     <string name="signed_out">signed out</string>
     <string name="category_name">Category Name</string>
     <string name="add_category">Add Category</string>
+    <string name="share_button_text">Share</string>
 </resources>

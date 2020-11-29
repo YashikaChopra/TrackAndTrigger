@@ -55,6 +55,16 @@ class ItemsAdapter: RecyclerView.Adapter<ItemsAdapter.ItemViewHolder>() {
 //            intent.putExtra(EXTRA_MESSAGE, currentCate)
 //            context.startActivity(intent)
         }
+        holder.itemView.share_button.setOnClickListener {
+            val context = holder.itemView.share_button.context
+            val message = currentItem.itemName + " left: " + currentItem.quantity.toString()
+            val shareIntent = Intent()
+            shareIntent.action = Intent.ACTION_SEND
+            shareIntent.putExtra(Intent.EXTRA_TEXT, message)
+            shareIntent.type = "text/plain"
+
+            context.startActivity(Intent.createChooser(shareIntent, "Share via : "))
+        }
     }
 
     override fun getItemCount(): Int {
