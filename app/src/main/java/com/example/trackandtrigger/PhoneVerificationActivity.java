@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.trackandtrigger.activities.CategoryActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -176,7 +175,7 @@ public class PhoneVerificationActivity extends AppCompatActivity implements View
 
                             FirebaseUser user = task.getResult().getUser();
                             //updateUI(STATE_SIGNIN_SUCCESS, user);
-                            Intent i = new Intent(PhoneVerificationActivity.this, CategoryActivity.class);
+                            Intent i = new Intent(PhoneVerificationActivity.this, MainActivity.class);
                             startActivity(i);
                         } else {
                             // Sign in failed, display a message and update the UI
@@ -240,7 +239,7 @@ public class PhoneVerificationActivity extends AppCompatActivity implements View
                             Log.d(TAG, "linkWithCredential:success");
                             FirebaseUser user = task.getResult().getUser();
                             Toast.makeText(PhoneVerificationActivity.this, "Merged", Toast.LENGTH_SHORT).show();
-                            Intent i= new Intent(PhoneVerificationActivity.this, CategoryActivity.class);
+                            Intent i= new Intent(PhoneVerificationActivity.this, MainActivity.class);
                             startActivity(i);
                         } else {
                             Log.w(TAG, "linkWithCredential:failure", task.getException());
