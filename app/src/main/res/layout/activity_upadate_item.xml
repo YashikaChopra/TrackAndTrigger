@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.UpdateItemActivity">
 
     <RelativeLayout
@@ -103,6 +104,16 @@
             android:layout_below="@id/input_item_quantity"
             />
 
+        <Button
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Check nearby stores"
+            android:layout_below="@id/update_list_button"
+            />
+
     </RelativeLayout>
+
 </ScrollView>
 

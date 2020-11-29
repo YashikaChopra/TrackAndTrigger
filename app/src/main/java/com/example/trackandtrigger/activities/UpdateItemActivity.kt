@@ -1,5 +1,7 @@
 package com.example.trackandtrigger.activities
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -45,6 +47,15 @@ class UpdateItemActivity : AppCompatActivity() {
         val mUpdateItemButton = findViewById<Button>(R.id.update_list_button)
         mUpdateItemButton.setOnClickListener {
             updateItem(category, idItem)
+        }
+
+        val map = findViewById<Button>(R.id.map);
+
+        map.setOnClickListener { /*Intent i = new Intent(Todo_Activity.this, MainActivity.class);
+                        startActivity(i);*/
+            val intent = Intent()
+            intent.data = Uri.parse("https://www.google.com/maps")
+            startActivity(intent)
         }
 
     }

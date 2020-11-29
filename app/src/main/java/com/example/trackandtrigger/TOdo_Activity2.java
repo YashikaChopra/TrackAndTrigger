@@ -5,9 +5,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class TOdo_Activity2 extends AppCompatActivity {
@@ -37,11 +41,22 @@ private int id;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_t_odo_2);
+        setTitle("Edit");
 
         editText=findViewById(R.id.todo_edit_text);
         String contents=getIntent().getStringExtra("contents");
         id=getIntent().getIntExtra("id",0);
         editText.setText(contents);
+
+        Button save = findViewById(R.id.todosave);
+        save.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(TOdo_Activity2.this, Todo_Activity.class);
+                startActivity(i);
+            }
+        });
 
     }
     @Override

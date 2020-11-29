@@ -30,4 +30,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:contentDescription="@string/to_add_category" />
 
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

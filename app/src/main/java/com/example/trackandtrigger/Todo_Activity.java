@@ -1,5 +1,7 @@
 package com.example.trackandtrigger;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -34,6 +36,7 @@ public class Todo_Activity extends AppCompatActivity {
 
 
         FloatingActionButton button=findViewById(R.id.add_todo_button);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +45,7 @@ public class Todo_Activity extends AppCompatActivity {
 
             }
         });
+
 
         // To remove items
         /*recyclerView.setOnLongClickListener(new View.OnLongClickListener() {

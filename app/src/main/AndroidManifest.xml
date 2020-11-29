@@ -24,18 +24,23 @@
             android:name=".activities.ItemsActivity"
             android:parentActivityName=".activities.CategoryActivity"></activity>
         <activity android:name=".activities.CategoryActivity"></activity>>
+
+        <activity android:name=".Diary_Activity"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".Todo_Activity"
+            android:parentActivityName=".MainActivity"></activity>
+
         <activity
             android:name=".activities.AddCategoryActivity"
             android:parentActivityName=".activities.CategoryActivity" />
 
 
+
         <activity android:name=".Diary_Activity2"></activity>
-        <activity android:name=".Diary_Activity" />
         <activity android:name=".NotificationMessage" />
         <activity android:name=".Message" />
         <activity android:name=".Notification" />
         <activity android:name=".TOdo_Activity2" />
-        <activity android:name=".Todo_Activity" />
         <activity android:name=".MainActivity"/>
 
         <activity android:name=".PhoneVerificationActivity" />

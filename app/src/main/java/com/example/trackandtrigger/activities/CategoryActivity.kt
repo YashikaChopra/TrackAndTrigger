@@ -2,18 +2,16 @@
 package com.example.trackandtrigger.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trackandtrigger.R
 import com.example.trackandtrigger.data.data_category.CategoryViewModel
-import com.example.trackandtrigger.activities.AddCategoryActivity
-import com.example.trackandtrigger.activities.CategoryAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class CategoryActivity : AppCompatActivity() {
@@ -47,6 +45,7 @@ class CategoryActivity : AppCompatActivity() {
 
             val intent = Intent(this, AddCategoryActivity::class.java)
             startActivity(intent)
+
 
         }
 

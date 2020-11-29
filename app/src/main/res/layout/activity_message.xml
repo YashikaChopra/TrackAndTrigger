@@ -8,61 +8,63 @@
 
 
     <EditText
-        android:id="@+id/editext_message"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="20dp"
         android:padding="10dp"
         android:layout_marginTop="10dp"
         android:hint="Give Title"
         android:layout_height="50dp"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText"
-        android:hint="Enter Phone Number"
-        android:inputType="phone"
-        android:layout_marginHorizontal="20dp"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/editext_message"
-        android:layout_centerHorizontal="true" />
 
     <EditText
+        android:id="@+id/todoemail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Email Address"
+        android:inputType="textEmailAddress"
+        android:layout_marginHorizontal="20dp"
+        android:padding="10dp"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:id="@+id/email_msg"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/todoemail"
         android:layout_marginHorizontal="20dp"
         android:padding="10dp"
         android:layout_marginTop="10dp"
-        android:hint="Necessary Documents" />
+        android:hint="Details" />
+
     <Button
+        android:id="@+id/btn_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_time"
         android:text="Select Time"
         android:textAllCaps="false"
         android:background="@color/design_default_color_primary_dark"
         android:textColor="@color/white"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="25dp" />
+
     <Button
+        android:id="@+id/btn_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_date"
         android:text="Select date"
         android:textAllCaps="false"
         android:background="@color/design_default_color_primary_dark"
         android:textColor="@color/white"
         android:layout_marginTop="10dp"
         android:layout_marginHorizontal="25dp" />
+
     <Button
+        android:id="@+id/btn_done"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:id="@+id/btn_done"
-        android:textColor="@color/white"
-        android:text="Done"
         android:background="@color/design_default_color_primary_dark"
-        android:layout_height="wrap_content"/>
+        android:text="Done"
+        android:textColor="@color/white" />
 </LinearLayout>

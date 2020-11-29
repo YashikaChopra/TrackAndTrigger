@@ -1,6 +1,7 @@
 package com.example.trackandtrigger;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
@@ -8,9 +9,11 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -25,19 +28,31 @@ import androidx.core.content.ContextCompat;
 
 import com.example.trackandtrigger.Database.EntityClass;
 
+import java.security.AccessController;
+import java.security.Provider;
+import java.security.Security;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Properties;
+
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class Message extends AppCompatActivity implements View.OnClickListener {
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0 ;
     Button btn_time, btn_date, btn_done;
-    EditText editext_message;
-    EditText txtphoneNo;
-    EditText txtMessage;
+    EditText title;
+    EditText emailid;
+    //EditText txtphoneNo;
+    EditText msg;
     String phoneNo;
     String message;
     String timeTonotify;
@@ -51,9 +66,10 @@ public class Message extends AppCompatActivity implements View.OnClickListener {
         btn_time = findViewById(R.id.btn_time);
         btn_date = findViewById(R.id.btn_date);
         btn_done = findViewById(R.id.btn_done);
-        editext_message = findViewById(R.id.editext_message);
-        txtphoneNo = (EditText) findViewById(R.id.editText);
-       txtMessage = (EditText) findViewById(R.id.editText2);
+        title = findViewById(R.id.title);
+        //txtphoneNo = (EditText) findViewById(R.id.editText);
+        msg = (EditText) findViewById(R.id.email_msg);
+        emailid = findViewById(R.id.todoemail);
 
 
         btn_time.setOnClickListener(this);
@@ -68,16 +84,16 @@ public class Message extends AppCompatActivity implements View.OnClickListener {
         } else if (v == btn_date) {
             selectDate();
         } else {
-            sendSMSMessage();
+            //sendSMSMessage();
             submit();
-            Intent intent=new Intent(Message.this,Notification.class);
+
+            Intent intent=new Intent(Message.this,Todo_Activity.class);
             startActivity(intent);
         }
-
     }
-    protected void sendSMSMessage() {
+    /*protected void sendSMSMessage() {
         phoneNo = txtphoneNo.getText().toString();
-        message = txtMessage.getText().toString();
+        message = msg.getText().toString();
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.SEND_SMS)
@@ -90,9 +106,9 @@ public class Message extends AppCompatActivity implements View.OnClickListener {
                         MY_PERMISSIONS_REQUEST_SEND_SMS);
             }
         }
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_SEND_SMS: {
@@ -110,10 +126,10 @@ public class Message extends AppCompatActivity implements View.OnClickListener {
             }
         }
 
-    }
+    }*/
 
     private void submit() {
-        String text = editext_message.getText().toString().trim();
+        String text = title.getText().toString().trim();
         if (text.isEmpty()) {
             Toast.makeText(this, "Please Give the Title", Toast.LENGTH_SHORT).show();
         } else {
@@ -121,13 +137,13 @@ public class Message extends AppCompatActivity implements View.OnClickListener {
                 Toast.makeText(this, "Please select date and time", Toast.LENGTH_SHORT).show();
             } else {
                 EntityClass entityClass = new EntityClass();
-                String value = ((editext_message.getText().toString()+" is due 1 hr").trim());
+                String value = ((title.getText().toString()+" is due 1 hr").trim());
                 String date = (btn_date.getText().toString().trim());
                 String time = (notify.trim());
                 entityClass.setEventdate(date);
                 entityClass.setEventname(value);
                 entityClass.setEventtime(time);
-                setAlarm(value, date, time);
+                setAlarm(value, date, time, msg.getText().toString(), emailid.getText().toString());
                 Toast.makeText(this, "Will notify you 1hr before time ", Toast.LENGTH_SHORT).show();
             }
         }
@@ -206,19 +222,21 @@ public class Message extends AppCompatActivity implements View.OnClickListener {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK && data != null) {
                 ArrayList<String> text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                editext_message.setText(text.get(0));
+                title.setText(text.get(0));
             }
         }
 
     }
 
-    private void setAlarm(String text, String date, String time) {
+    private void setAlarm(String text, String date, String time, String msg, String emailid) {
         AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         Intent intent = new Intent(getApplicationContext(), AlarmBroadcast.class);
         intent.putExtra("event", text);
         intent.putExtra("time", date);
         intent.putExtra("date", time);
+        intent.putExtra("msg", msg);
+        intent.putExtra("emailid", emailid);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
         String dateandtime = date + " " + timeTonotify;
@@ -234,4 +252,4 @@ public class Message extends AppCompatActivity implements View.OnClickListener {
         finish();
 
     }
-}
+};

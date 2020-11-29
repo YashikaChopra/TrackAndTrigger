@@ -20,7 +20,7 @@ public class Diary_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diary_);
-
+        setTitle("Diary");
         database= Room.databaseBuilder(getApplicationContext(), com.example.trackandtrigger.DiaryDatabase.class,"DIARYS")
                 .allowMainThreadQueries()
                 .build();
