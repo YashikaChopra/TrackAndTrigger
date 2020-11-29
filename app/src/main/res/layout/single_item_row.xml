@@ -8,13 +8,13 @@ android:orientation="horizontal"
 android:padding="8dp"
 android:id="@+id/singleItem_row">
 
-<ImageView
+<!--<ImageView
     android:id="@+id/item_image"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_weight="1"
     android:minHeight="150dp"
-    android:src="@drawable/ic_image" />
+    android:src="@drawable/ic_image" />-->
 
 <RelativeLayout
     android:layout_width="0dp"
