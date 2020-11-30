@@ -70,7 +70,7 @@ public class Message extends AppCompatActivity implements View.OnClickListener {
         title = findViewById(R.id.title);
         //txtphoneNo = (EditText) findViewById(R.id.editText);
         msg = (EditText) findViewById(R.id.email_msg);
-        emailid = findViewById(R.id.todoemail);
+        emailid =(EditText) findViewById(R.id.todoemail);
 
 
         btn_time.setOnClickListener(this);
@@ -86,10 +86,10 @@ public class Message extends AppCompatActivity implements View.OnClickListener {
             selectDate();
         } else {
             //sendSMSMessage();
-            submit();
-
-            Intent intent=new Intent(Message.this,Todo_Activity.class);
-            startActivity(intent);
+            if(submit()) {
+                Intent intent = new Intent(Message.this, Todo_Activity.class);
+                startActivity(intent);
+            }
         }
     }
     /*protected void sendSMSMessage() {
@@ -129,23 +129,33 @@ public class Message extends AppCompatActivity implements View.OnClickListener {
 
     }*/
 
-    private void submit() {
+    private boolean submit() {
         String text = title.getText().toString().trim();
         if (text.isEmpty()) {
             Toast.makeText(this, "Please Give the Title", Toast.LENGTH_SHORT).show();
-        } else {
-            if (btn_time.getText().toString().equals("Select Time") || btn_date.getText().toString().equals("Select date")) {
-                Toast.makeText(this, "Please select date and time", Toast.LENGTH_SHORT).show();
-            } else {
+            return false;
+        }
+        else
+        {
+            if (btn_time.getText().toString().equals("Select Time") ) {
+                Toast.makeText(this, "Please select time", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            else if(btn_date.getText().toString().equals("Select date")) {
+                Toast.makeText(this, "Please select date", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            else {
                 EntityClass entityClass = new EntityClass();
-                String value = ((title.getText().toString()+" is due 1 hr").trim());
+                String value = ((title.getText().toString()+" is due in 1 hr").trim());
                 String date = (btn_date.getText().toString().trim());
                 String time = (notify.trim());
                 entityClass.setEventdate(date);
                 entityClass.setEventname(value);
                 entityClass.setEventtime(time);
                 setAlarm(value, date, time, msg.getText().toString(), emailid.getText().toString());
-                Toast.makeText(this, "Will notify you 1hr before time ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "We will notify you 1hr before the deadline", Toast.LENGTH_LONG).show();
+                return true;
             }
         }
     }

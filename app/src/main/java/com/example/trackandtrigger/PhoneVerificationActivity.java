@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.hbb20.CountryCodePicker;
 
 import java.util.concurrent.TimeUnit;
 
@@ -40,6 +41,7 @@ public class PhoneVerificationActivity extends AppCompatActivity implements View
     String phonePattern = "[0-9]{10}";
     EditText phone, phoneOTP;
     Button sendPhone, verifyPhone, resendPhone;
+    CountryCodePicker ccp;
     boolean phoneVerified = false;
     String TAG = "PhoneVerify";
 
@@ -54,6 +56,7 @@ public class PhoneVerificationActivity extends AppCompatActivity implements View
         sendPhone = (Button)findViewById(R.id.b_sendPhone);
         verifyPhone = (Button)findViewById(R.id.b_verifyPhone);
         resendPhone = (Button)findViewById(R.id.b_resendPhone);
+        ccp = (CountryCodePicker) findViewById(R.id.ccp);
 
         phone.addTextChangedListener(this);
         verifyPhone.setOnClickListener(this);
@@ -61,6 +64,14 @@ public class PhoneVerificationActivity extends AppCompatActivity implements View
         resendPhone.setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
+
+        ccp.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
+            @Override
+            public void onCountrySelected() {
+                Toast.makeText(PhoneVerificationActivity.this, "Updated " + ccp.getSelectedCountryName(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
@@ -97,7 +108,7 @@ public class PhoneVerificationActivity extends AppCompatActivity implements View
                 phoneOTP.setVisibility(View.VISIBLE);
                 verifyPhone.setVisibility(View.VISIBLE);
                 resendPhone.setVisibility(View.VISIBLE);*/
-                startPhoneNumberVerification(phone.getText().toString());
+                startPhoneNumberVerification(ccp.getSelectedCountryCodeWithPlus() + phone.getText().toString());
                 break;
 
             case R.id.b_verifyPhone:

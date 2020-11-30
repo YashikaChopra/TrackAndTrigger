@@ -31,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_below="@+id/todoemail"
+        android:importantForAutofill="no"
         android:layout_marginHorizontal="20dp"
         android:padding="10dp"
         android:layout_marginTop="10dp"

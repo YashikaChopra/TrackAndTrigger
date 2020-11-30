@@ -64,5 +64,4 @@ private int id;
         super.onPause();
         Todo_Activity.database.todoDAO().save(editText.getText().toString(),id);
     }
-
 }

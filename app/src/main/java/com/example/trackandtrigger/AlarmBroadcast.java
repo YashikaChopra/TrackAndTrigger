@@ -42,12 +42,12 @@ public class AlarmBroadcast extends BroadcastReceiver {
         String date = bundle.getString("date") + " " + bundle.getString("time");
         String msg = bundle.getString("msg");
         String emailid = bundle.getString("emailid");
-//        String phone=bundle.getString("phone");
-//        String msg=bundle.getString("msg");
+        //String phone=bundle.getString("phone");
+        //String msg=bundle.getString("msg");
 
         //Click on Notification
 
-        Intent intent1 = new Intent(context, TOdo_Activity2.class);
+        Intent intent1 = new Intent(context, Todo_Activity.class);
         intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent1.putExtra("message", text);
         //Notification Builder
@@ -58,14 +58,14 @@ public class AlarmBroadcast extends BroadcastReceiver {
 
         RemoteViews contentView = new RemoteViews(context.getPackageName(), R.layout.notification_layout);
         contentView.setImageViewResource(R.id.image, R.mipmap.ic_launcher);
-        PendingIntent pendingSwitchIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-        contentView.setOnClickPendingIntent(R.id.flashButton, pendingSwitchIntent);
+        //PendingIntent pendingSwitchIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        //contentView.setOnClickPendingIntent(R.id.snooze, pendingSwitchIntent);
         contentView.setTextViewText(R.id.message, text);
         contentView.setTextViewText(R.id.date, date);
         mBuilder.setAutoCancel(true);
         mBuilder.setOngoing(true);
         mBuilder.setPriority(android.app.Notification.PRIORITY_HIGH);
-        mBuilder.setOnlyAlertOnce(true);
+        //mBuilder.setOnlyAlertOnce(true);
         mBuilder.build().flags = android.app.Notification.FLAG_NO_CLEAR | android.app.Notification.PRIORITY_HIGH;
         mBuilder.setContent(contentView);
         mBuilder.setContentIntent(pendingIntent);
@@ -80,7 +80,7 @@ public class AlarmBroadcast extends BroadcastReceiver {
 
         Notification notification = mBuilder.build();
         notificationManager.notify(1,notification);
-//        sendSMSMessage(phone,msg);
+        //sendSMSMessage(phone,msg);
         final GMailSender sender = new GMailSender("manasabollavaram2000@gmail.com", "Bits@1234");
         new AsyncTask<Void, Void, Void>() {
             @SuppressLint("StaticFieldLeak")
@@ -88,16 +88,13 @@ public class AlarmBroadcast extends BroadcastReceiver {
                 try {
                     sender.sendMail(text,
                             msg,
-                            "manasabollavaram2000@gmail.com",
+                            "TrackAndTrigger",
                             emailid);
                 } catch (Exception e) {
                     Log.e("SendMail", e.getMessage(), e);
                 }
                 return null;}
         }.execute();
-
-
-
     }
 
 //    private void sendSMSMessage(String phone, String msg) {
@@ -148,7 +145,7 @@ class GMailSender extends javax.mail.Authenticator {
     public synchronized void sendMail(String subject, String body, String sender, String recipients) throws Exception {
         try {
             javax.mail.Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("manasabollavaram2000@gmail.com"));
+            message.setFrom(new InternetAddress("TrackAndTrigger"));
             message.setRecipients(javax.mail.Message.RecipientType.TO,
                     InternetAddress.parse(recipients));
             message.setSubject(subject);
